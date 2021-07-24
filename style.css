@@ -49,3 +49,10 @@ header{
     border-radius: 2rem;
     border: 1px solid rgb(41, 29, 29);
 }
+.logo span{
+    display: block;
+    height: 55px;
+    width: 55px;
+    background: #fff;
+    border-radius: 50%;
+}

@@ -1,37 +1,81 @@
 'use strict';
-const products = [
-    { id: 1, title: 'Notebook', price: 1000 },
-    { id: 2, title: 'Mouse', price: 100 },
-    { id: 3, title: 'Keyboard', price: 250 },
-    { id: 4, title: 'Gamepad', price: 150 },
-];
 
-const renderProduct = (title, price, image = "https://picsum.photos/seed/9/200", altImage = "Pictures") => {
-    return `<div class="product-item">
-                <img src="${image}" alt="${altImage}">
-                <h3>${title}</h3>
-                <p>Price: ${price}</p>
-                <button class="by-btn">Добавить</button>
-              </div>`;
+class GoodsItem {
+    constructor(title, price, image = "https://picsum.photos/seed/9/200", altImage = "Pictures") {
+        this.title = title;
+        this.price = price;
+        this.image = image;
+        this.altImage = altImage;
+    }
+    rendredProduct() {
+        return `<div class="product-item">
+                    <img src="${this.image}" alt="${this.altImage}">
+                    <h3>${this.title}</h3>
+                    <p>Price: ${this.price}</p>
+                    <button class="by-btn">Добавить</button>
+                </div>`;
+    }
 }
 
-// const renderProducts = (list) => {
-//     const productList = list.map((item) => {
-//         return renderProduct(item.title, item.price);
-//     });
-
-//     console.log(productList);
-
-////add cycle for every element and eliminate ","
-//     for (let i = 0; i < productList.length; i++) {
-//         document.querySelector('.products').insertAdjacentHTML('afterbegin', productList[i]);
-//     }
-// }
-
-const renderProducts = (list) => {
-    list.forEach(element => {
-        document.querySelector('.products').insertAdjacentHTML('afterbegin',
-            renderProduct(element.title, element.price));
-    });
+class GoodsList {
+    constructor() {
+        this.goods = [];
+    }
+    fetchGoods() {
+        this.goods = [
+            { title: 'Shirt', price: 150 },
+            { title: 'Socks', price: 50 },
+            { title: 'Jacket', price: 350 },
+            { title: 'Shoes', price: 250 },
+        ];
+    }
+    render() {
+        let listHtml = '';
+        this.goods.forEach(good => {
+            const goodItem = new GoodsItem(good.title, good.price);
+            listHtml += goodItem.rendredProduct();
+        });
+        document.querySelector('.products').innerHTML = listHtml;
+    }
+    // Lesson 2.2(Добавьте для GoodsList метод, определяющий суммарную стоимость всех товаров.)
+    getTotalPrice() {
+        let totalPrice = 0;
+        this.goods.forEach(good => {
+            totalPrice += good.price;
+        });
+        console.log(totalPrice);
+    }
 }
-renderProducts(products);
+
+const list = new GoodsList();
+list.fetchGoods();
+list.render();
+list.getTotalPrice();
+
+class Cart {
+    constructor() {
+        this.items = [];
+    }
+    render() {
+
+    }
+    addItem() {
+
+    }
+    deleteItem() {
+
+    }
+    getTotalPrice() {
+
+    }
+}
+class CartItem {
+    constructor(name, price, img = "https://picsum.photos/seed/9/200") {
+        this.name = name;
+        this.price = price;
+        this.img = img;
+    }
+    render() {
+
+    }
+}
