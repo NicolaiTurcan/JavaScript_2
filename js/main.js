@@ -65,13 +65,21 @@ class GoodsList {
 const list = new GoodsList();
 
 
-
+// getJson(url){
+//     return fetch(url ? url : `${API + this.url}`)
+//       .then(result => result.json())
+//       .catch(error => {
+//         console.log(error);
+//       })
+//   }
 
 
 
 class Cart {
     constructor() {
         this.items = [];
+        this.url = '/getBasket.json';
+        this.getProductsList()
     }
     render() {
 
@@ -84,6 +92,13 @@ class Cart {
     }
     getTotalPrice() {
 
+    }
+    getProductsList() {
+        return fetch(`${API + this.url}`)
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            });
     }
 }
 class CartItem {
